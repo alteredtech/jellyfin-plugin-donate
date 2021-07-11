@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Donate</title>
+</head>
+<body>
+    <div id="DonateConfigPage" data-role="page" class="page type-interior pluginConfigurationPage" data-require="emby-input,emby-button,emby-select,emby-checkbox">
+        <div data-role="content">
+            <div class="content-primary">
+                <form id="DonateConfigForm">
+                    <div class="inputContainer">
+                        <label class="inputeLabel inputLabelUnfocused" for="VenmoString">Venmo</label>
+                        <input id="VenmoString" name="VenmoString" type="text" is="emby-input" onkeyup="addHash(this)"/>
+                        <div class="fieldDescription">Add your Venmo account here.</div>
+                    </div>
+                    <div>
+                        <button is="emby-button" type="submit" class="raised button-submit block emby-button">
+                            <span>Save</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script type="text/javascript">
+            var DonateConfig = {
+                pluginUniqueId: 'b7162d9a-f7a9-453f-a621-40c628213b7c'
+            };
+
+            document.querySelector('#DonateConfigPage')
+                .addEventListener('pageshow', function() {
+                    Dashboard.showLoadingMsg();
+                    ApiClient.getPluginConfiguration(DonateConfig.pluginUniqueId).then(function (config) {
+                        document.querySelector('#VenmoString').value = config.VenmoString;
+                        Dashboard.hideLoadingMsg();
+                    });    
+                });
+            
+            document.querySelector('#DonateConfigForm')
+                .addEventListener('submit', function() {
+                Dashboard.showLoadingMsg();
+                ApiClient.getPluginConfiguration(DonateConfig.pluginUniqueId).then(function (config) {
+                    config.VenmoString = document.querySelector('#VenmoString').value;
+                    ApiClient.updatePluginConfiguration(DonateConfig.pluginUniqueId, config).then(function (result) {
+                        Dashboard.processPluginConfigurationUpdateResult(result);
+                    });
+                });
+
+                return false;
+            });
+            function addHash(elem) {
+                var val = elem.value;
+                if(!val.match(/^@/)) {
+                    elem.value = '@' + val;
+                }
+            }
+        </script>
+    </div>
+</body>
+</html>
