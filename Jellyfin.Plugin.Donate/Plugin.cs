@@ -28,7 +28,8 @@ namespace Jellyfin.Plugin.Donate
                 new PluginPageInfo
                 {
                     Name = this.Name,
-                    EmbeddedResourcePath = string.Format("{0}.Configuration.configPage.html", GetType().Namespace)
+                    EmbeddedResourcePath = string.Format("{0}.Configuration.configPage.html", GetType().Namespace),
+                    EnableInMainMenu = true
                 }
             };
         }

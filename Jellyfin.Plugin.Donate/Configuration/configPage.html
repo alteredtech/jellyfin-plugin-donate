@@ -10,8 +10,8 @@
             <div class="content-primary">
                 <form id="DonateConfigForm">
                     <div class="inputContainer">
-                        <label class="inputeLabel inputLabelUnfocused" for="VenmoString">Venmo</label>
-                        <input id="VenmoString" name="VenmoString" type="text" is="emby-input" onkeyup="addHash(this)"/>
+                        <label class="inputeLabel inputLabelUnfocused" for="VenmoAccount">Venmo</label>
+                        <input id="VenmoAccount" name="VenmoAccountSetting" type="text" is="emby-input" onkeyup="addHash(this)"/>
                         <div class="fieldDescription">Add your Venmo account here.</div>
                     </div>
                     <div>
@@ -31,7 +31,7 @@
                 .addEventListener('pageshow', function() {
                     Dashboard.showLoadingMsg();
                     ApiClient.getPluginConfiguration(DonateConfig.pluginUniqueId).then(function (config) {
-                        document.querySelector('#VenmoString').value = config.VenmoString;
+                        document.querySelector('#VenmoAccount').value = config.VenmoAccount;
                         Dashboard.hideLoadingMsg();
                     });    
                 });
@@ -40,7 +40,7 @@
                 .addEventListener('submit', function() {
                 Dashboard.showLoadingMsg();
                 ApiClient.getPluginConfiguration(DonateConfig.pluginUniqueId).then(function (config) {
-                    config.VenmoString = document.querySelector('#VenmoString').value;
+                    config.VenmoAccount = document.querySelector('#VenmoAccount').value;
                     ApiClient.updatePluginConfiguration(DonateConfig.pluginUniqueId, config).then(function (result) {
                         Dashboard.processPluginConfigurationUpdateResult(result);
                     });
