@@ -1,4 +1,6 @@
 <h1 align="center">Jellyfin Donate Plugin</h1>
+<h2 align="center">Still alpha</h2>
+This is a back burner project as I have not found a way to add an icon to the landing page on jellyfin. If you know how please create an issue with a link on how to do that and I will do my best to get it integrated. Thanks!
 <!-- <h3 align="center">Part of the <a href="https://jellyfin.media">Jellyfin Project</a></h3> -->
 
 <p align="center">
